@@ -12,7 +12,7 @@ export async function POST(req) {
       md5sig,
     } = await req.json();
 
-    const mSec = process.env.ms;  // Merchernt Secret use .env
+    const mSec = process.env.MS;  // Merchernt Secret use .env
 
     const hashText =
       merchant_id +
