@@ -4,7 +4,7 @@ export async function POST(req) {
   const { merchant_id, order_id, payhere_amount, payhere_currency } =
     await req.json();
 
-  const mSec = process.env.ms; // Merchernt Secret use .env
+  const mSec = process.env.MS; // Merchernt Secret use .env
 
   const hashText =
     merchant_id +
