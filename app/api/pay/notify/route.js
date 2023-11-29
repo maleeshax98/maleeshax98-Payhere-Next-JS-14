@@ -2,7 +2,6 @@ import md5 from "md5";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  console.log("huththa");
 
   try {
     const data = await req.formData();
