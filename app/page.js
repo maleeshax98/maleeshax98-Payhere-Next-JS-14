@@ -12,10 +12,11 @@ export default function Home() {
     alert(hash);
     var payment = {
       sandbox: true,
-      merchant_id: process.env.mid, // Replace your Merchant ID
+      merchant_id: process.env.NEXT_PUBLIC_MID, // Replace your Merchant ID
       return_url: "http://localhost/", // Important
       cancel_url: "http://localhost/", // Important
-      notify_url: "http://localhost/api/pay/notify",
+      notify_url:
+        "https://b194-2402-4000-2201-3c0-b1f1-acd1-63dd-b981.ngrok-free.app/api/pay/notify", //not working with localhost you can test with ngrok
       order_id: order_id,
       items: "Door bell wireles",
       amount: payhere_amount,
@@ -36,6 +37,23 @@ export default function Home() {
     };
 
     payhere.startPayment(payment);
+
+    payhere.onCompleted = function onCompleted(orderId, all) {
+      console.log("Payment completed. OrderID:" + orderId);
+      // Note: validate the payment and show success or failure page to the customer
+    };
+
+    // Payment window closed
+    payhere.onDismissed = function onDismissed() {
+      // Note: Prompt user to pay again or show an error page
+      console.log("Payment dismissed");
+    };
+
+    // Error occurred
+    payhere.onError = function onError(error) {
+      // Note: show an error page
+      console.log("Error:" + error);
+    };
   };
   return (
     <div>

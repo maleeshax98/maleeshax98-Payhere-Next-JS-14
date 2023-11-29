@@ -2,17 +2,19 @@ import md5 from "md5";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  try {
-    const {
-      merchant_id,
-      order_id,
-      payhere_amount,
-      payhere_currency,
-      status_code,
-      md5sig,
-    } = await req.json();
+  console.log("huththa");
 
-    const mSec = process.env.ms;  // Merchernt Secret use .env
+  try {
+    const data = await req.formData();
+
+    const order_id = data.get("order_id");
+    const payhere_amount = data.get("payhere_amount");
+    const payhere_currency = data.get("payhere_currency");
+    const status_code = data.get("status_code");
+    const md5sig = data.get("md5sig");
+    const merchant_id = data.get("merchant_id");
+
+    const mSec = process.env.MS; // Merchernt Secret use .env
 
     const hashText =
       merchant_id +
